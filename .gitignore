@@ -1,0 +1,40 @@
+# ==============================================================================
+# Git Ignore - G-BA PDF Pipeline
+# ==============================================================================
+
+# Ignorar todos os PDFs e arquivos Markdown (exceto README.md)
+*.pdf
+*.md
+!README.md
+
+# Pastas de dados pesados e saídas
+gba/
+gba_markdown_de/
+gba_markdown_en/
+gba_markdown_*/
+dados_extraidos/
+dados_extraidos_gba.*
+
+# Arquivos temporários e de trabalho
+*.tmp
+*.temp
+*.log
+
+# Caches do Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Ambientes virtuais
+venv/
+.venv/
+env/
+.env
+
+# Arquivos de sistema e IDEs
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
+desktop.ini
