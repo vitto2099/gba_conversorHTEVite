@@ -119,9 +119,39 @@ Para facilitar no Windows, cada etapa possui seu próprio arquivo `.bat` pronto 
 
 ---
 
-## 🛡️ Proteção do Computador
+## ⚡ Modo Especial: FORÇA TOTAL (`forcatotal/`)
 
-Todos os 3 scripts foram desenvolvidos com salvaguardas nativas:
+Para quem deseja **o menor tempo possível de processamento** e tem um processador multi-core com boa memória RAM (como o **Intel Core i5 de 13ª Geração com 12 threads e 24 GB de RAM**), criamos a pasta dedicada **`forcatotal/`**.
+
+> [!TIP]
+> **Quando usar o Modo Força Total?**
+> - **Recomendado para SSD Interno (ex: `C:`):** Quando você copiar os arquivos para o SSD, use o Força Total para aproveitar 100% da velocidade sem gargalo de USB/HD mecânico.
+> - **Se estiver no HD Externo:** O modo convencional da raiz ainda é mais silencioso e seguro termicamente, mas o Força Total também pode ser usado se você quiser prioridade alta de CPU.
+
+### 🏎️ Comparativo: Padrão vs. Força Total
+
+| Recurso | Versão Convencional (Raiz) | ⚡ Versão FORÇA TOTAL (`forcatotal/`) |
+| :--- | :--- | :--- |
+| **Threads de Conversão (Etapa 1)** | 2 threads (1 no Eco) | **8 threads paralelas simultâneas** |
+| **Tradução (Etapa 2)** | 1 arquivo por vez | **4 arquivos traduzidos ao mesmo tempo** |
+| **Extração (Etapa 3)** | 1 thread sequencial | **8 threads paralelas com Regex compilado em C** |
+| **Prioridade no Windows** | Baixa / Ociosa (não esquentar) | **Acima do Normal / Máxima CPU** |
+| **Pausas / Delays** | Pausas térmicas ativadas | **Latência zero (máximo throughput)** |
+| **Execução Completa (1 clique)** | Manual via menu | **`iniciar_tudo_forcatotal.bat` (faz 1 ➔ 2 ➔ 3 direto)** |
+
+### 🚀 Como Usar o Força Total:
+1. Abra a pasta **`forcatotal/`**.
+2. Dê dois cliques em **`iniciar_tudo_forcatotal.bat`** para rodar todo o pipeline na velocidade máxima.
+3. Ou use os executáveis individuais da pasta:
+   - `1_converter_forcatotal.bat`: Apenas conversão de PDF para Markdown.
+   - `2_traduzir_forcatotal.bat`: Apenas tradução para Inglês.
+   - `3_extrair_forcatotal.bat`: Apenas mineração de dados para Excel/JSON/CSV.
+
+---
+
+## 🛡️ Proteção do Computador (Modo Padrão)
+
+Na versão padrão da raiz, os scripts foram desenvolvidos com salvaguardas nativas:
 - **Prioridade Reduzida no Windows (`psutil`):** Os scripts rodam com `BELOW_NORMAL_PRIORITY_CLASS` (ou `IDLE_PRIORITY_CLASS` no modo `--eco`). Isso significa que o Windows sempre prioriza o seu navegador, vídeos, reuniões ou jogos; o script usa apenas o processamento ocioso.
 - **Consumo de Memória Travado:** Limpeza de lixo (`gc.collect()`) a cada arquivo e leitura sob demanda evitam estouro de RAM mesmo com centenas de páginas.
 - **Interface Rich no Terminal:** Exibe porcentagem, arquivos concluídos/restantes, tempo decorrido, estimativa de conclusão (ETA) e monitoramento de CPU e memória RAM em tempo real.
@@ -141,7 +171,17 @@ d:\Documentos Alemanha/
 ├── 3_extrair_dados_markdown.bat        # Launcher duplo clique da Etapa 3
 ├── 3_extrair_dados_markdown.py         # Script Etapa 3: Extrator Regulatório
 │
-├── README.md                           # Este manual de instruções
+├── forcatotal/                         # ⚡ SUÍTE TURBO (Máxima Velocidade / SSD):
+│   ├── iniciar_tudo_forcatotal.bat     # Executa 1 -> 2 -> 3 direto na máxima velocidade
+│   ├── 1_converter_forcatotal.bat      # Etapa 1 com 8 threads
+│   ├── 1_converter_forcatotal.py
+│   ├── 2_traduzir_forcatotal.bat      # Etapa 2 com 4 threads concorrentes
+│   ├── 2_traduzir_forcatotal.py
+│   ├── 3_extrair_forcatotal.bat        # Etapa 3 com 8 threads e Regex em C
+│   ├── 3_extrair_forcatotal.py
+│   └── README_FORCATOTAL.md            # Manual do modo turbo
+│
+├── README.md                           # Este manual de instruções principal
 ├── .gitignore                          # Ignora PDFs e Markdowns (mantém o README)
 ├── nomes_pastas_arquivos_traduzidos.xlsx # Mapeamento de pastas/arquivos para Inglês
 ├── nomes_pastas_arquivos_traduzidos.json # Cache de inicialização instantânea
