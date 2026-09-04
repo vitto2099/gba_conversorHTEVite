@@ -6,6 +6,7 @@
 *.pdf
 *.md
 !README.md
+!forcatotal/*.md
 
 # Pastas de dados pesados e saídas
 gba/
